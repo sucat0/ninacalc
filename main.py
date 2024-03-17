@@ -26,15 +26,13 @@ def get_broadcast_start_time(channel_id):
 
 
 def get_balloon_count(start_time):
-    url = "https://point.afreecatv.com/Balloon/AfreecaNormalExchange.asp?gifttype=1"
-
     options = webdriver.ChromeOptions()
 
     options.add_argument('lang=ko_KR')
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-    driver.get(url)
+    driver.get("https://point.afreecatv.com/Balloon/AfreecaNormalExchange.asp?gifttype=1")
 
     driver.implicitly_wait(5)
 
