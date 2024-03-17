@@ -1,3 +1,5 @@
+import random
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -77,8 +79,8 @@ def get_balloon_count(start_time):
 
                 sum += int(balloon_count)
 
+            driver.implicitly_wait(random.uniform(3, 5))
             driver.find_element(By.CSS_SELECTOR, f'#spnPaging > a:nth-child({j+2})').click()
-            driver.implicitly_wait(3)
 
     except Exception as e:
         print('풍선을 모두 읽었거나 오류가 발생했습니다.')
