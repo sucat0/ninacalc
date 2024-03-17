@@ -52,7 +52,7 @@ def get_balloon_count(start_time):
     sum = 0
 
     try:
-        for j in range(10000):  # 최대 10000페이지 읽기
+        for j in range(500):  # 최대 500페이지 읽기
             for i in range(10):
                 print(f'{j+1}페이지 {i + 1}번째 풍선을 읽는 중...')
                 col = driver.find_element(By.CSS_SELECTOR,
