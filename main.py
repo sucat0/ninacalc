@@ -57,7 +57,7 @@ def get_balloon_count(start_time):
                 if time < start_time:
                     print('방송 시간 이내의 풍선을 모두 읽었습니다.')
                     driver.quit()
-                    return output, nickname_id
+                    return output, nickname_id, sum
 
                 id_and_nickname = col.find_element(By.CSS_SELECTOR, 'td:nth-child(2) > span').text
                 nickname = id_and_nickname.split('(')[0]
@@ -83,11 +83,11 @@ def get_balloon_count(start_time):
     except Exception as e:
         print('풍선을 모두 읽었거나 오류가 발생했습니다.')
         driver.quit()
-        return output, nickname_id
+        return output, nickname_id, sum
 
 
 if __name__ == '__main__':
-    count, nickname_id = get_balloon_count(get_broadcast_start_time("vhznina"))
+    count, nickname_id, sum = get_balloon_count(get_broadcast_start_time("vhznina"))
 
     sorted_count = sorted(count.items())
 
@@ -96,5 +96,7 @@ if __name__ == '__main__':
         nickname = nickname_id[uid]
         # 닉네임1, 닉네임2: (별풍선 갯수)
         f.write(f'{", ".join(nickname)}: {balloon}개\n')
+
+    f.write(f'총 풍선 갯수: {sum}개')
 
     f.close()
