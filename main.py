@@ -63,8 +63,6 @@ def get_balloon_count(start_time):
                 uid = id_and_nickname.split('(')[1][:-1]
                 balloon_count = col.find_element(By.CSS_SELECTOR, 'td:nth-child(3)').text[:-1]
 
-                print(uid, nickname, balloon_count)
-
                 if nickname in nickname_id:
                     if nickname not in nickname_id[uid]:
                         nickname_id[uid].append(nickname)
