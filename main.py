@@ -21,12 +21,17 @@ def get_broadcast_start_time(channel_id):
     driver.get(f'https://play.afreecatv.com/{channel_id}')
     driver.implicitly_wait(1)
 
-    time = driver.find_element(By.CSS_SELECTOR,
+    start_time_text = driver.find_element(By.CSS_SELECTOR,
                                '#player_area > div.broadcast_information > div.text_information > ul > li:nth-child(1) > span').text
 
     driver.quit()
 
-    return dt.datetime.strptime(time, '%Y-%m-%d %H:%M:%S')
+    try:
+        start_time = dt.datetime.strptime(start_time_text, '%Y-%m-%d %H:%M:%S')
+        return start_time
+    except Exception as e:
+        start_time_text = input('방송 시작시간을 가져오는데 실패했습니다. 직접 입력해주세요. (예: 2021-01-01 00:00:00)')
+        return dt.datetime.strptime(start_time_text, '%Y-%m-%d %H:%M:%S')
 
 
 def get_balloon_count(start_time):
@@ -54,9 +59,9 @@ def get_balloon_count(start_time):
                                           f'body > div.sub_whole > div.sub_contents > div > div.myballoon > div:nth-child(2) > table > tbody > tr:nth-child({i + 2})')
 
                 time_text = col.find_element(By.CSS_SELECTOR, 'td:nth-child(1)').text
-                time = dt.datetime.strptime(time_text, '%Y-%m-%d %H:%M:%S')
+                balloon_time = dt.datetime.strptime(time_text, '%Y-%m-%d %H:%M:%S')
 
-                if time < start_time:
+                if balloon_time < start_time:
                     print('방송 시간 이내의 풍선을 모두 읽었습니다.')
                     driver.quit()
                     return output, nickname_id, sum
