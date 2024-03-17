@@ -79,8 +79,8 @@ def get_balloon_count(start_time):
 
                 sum += int(balloon_count)
 
+            driver.execute_script(f"javascript:goBJPage('{j+1}')")
             driver.implicitly_wait(random.uniform(3, 5))
-            driver.find_element(By.CSS_SELECTOR, f'#spnPaging > a:nth-child({j+2})').click()
 
     except Exception as e:
         print('풍선을 모두 읽었거나 오류가 발생했습니다.')
