@@ -99,7 +99,6 @@ def get_balloon_count(start_time):
 
     except Exception as e:
         print("풍선을 모두 읽었거나 오류가 발생했습니다.")
-        print(e)
         driver.quit()
         return output, nickname_id, sum_total
 
