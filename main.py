@@ -61,6 +61,8 @@ def get_balloon_count(start_time):
 
     try:
         for j in range(500):  # 최대 500페이지 읽기
+            driver.implicitly_wait(random.uniform(3, 5))
+
             for i in range(10):
                 print(f"{j+1}페이지 {i + 1}번째 풍선을 읽는 중...")
                 col = driver.find_element(
@@ -93,8 +95,7 @@ def get_balloon_count(start_time):
 
                 sum_total += int(balloon_count)
 
-            driver.execute_script(f"javascript:goBJPage('{j+1}')")
-            driver.implicitly_wait(random.uniform(3, 5))
+            driver.execute_script(f"javascript:goBJPage('{j+2}')")
 
     except Exception as e:
         print("풍선을 모두 읽었거나 오류가 발생했습니다.")
